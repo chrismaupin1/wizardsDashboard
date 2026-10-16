@@ -1,0 +1,487 @@
+/* Washington Wizards dashboard
+   Palette lives here and nowhere else - change these six values to re-skin. */
+
+:root {
+  --navy: #002b5c;
+  --navy-deep: #001a38;
+  --red: #e31837;
+
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --border: #dfe3e8;
+
+  --ink: #16202e;
+  --ink-soft: #5b6775;
+
+  --win: #1a7f4b;
+  --loss: #c02333;
+
+  --radius: 10px;
+  --gap: 16px;
+  --shadow: 0 1px 2px rgba(0, 43, 92, 0.06), 0 4px 12px rgba(0, 43, 92, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- header ---------------------------------------------------------------- */
+
+.site-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: #fff;
+  padding: 22px 0;
+  border-bottom: 4px solid var(--red);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.brand-mark {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--red);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.brand-text h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.brand-sub {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.record-badge {
+  margin: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* --- load / error states --------------------------------------------------- */
+
+.status {
+  margin: 48px 0;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.error-banner {
+  margin: 32px 0;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: #fdecee;
+  border: 1px solid #f5c2c9;
+  border-left: 4px solid var(--red);
+  color: #8c1626;
+}
+
+.error-banner strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.error-banner code {
+  font-size: 13px;
+  word-break: break-word;
+}
+
+/* --- sections -------------------------------------------------------------- */
+
+.section {
+  margin: 32px 0;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+.section-head .section-title {
+  margin-bottom: 0;
+}
+
+/* --- stat cards ------------------------------------------------------------ */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--gap);
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+}
+
+.stat-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.stat-value {
+  margin: 6px 0 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--navy);
+}
+
+.stat-value.is-win {
+  color: var(--win);
+}
+
+.stat-value.is-loss {
+  color: var(--loss);
+}
+
+.stat-note {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- last 5 games ---------------------------------------------------------- */
+
+.game-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.game-row {
+  display: grid;
+  grid-template-columns: 34px 74px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+}
+
+.game-row:first-child {
+  border-top: none;
+}
+
+.pill {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ink-soft);
+}
+
+.pill.is-win {
+  background: var(--win);
+}
+
+.pill.is-loss {
+  background: var(--loss);
+}
+
+.game-date {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.game-opponent {
+  font-weight: 600;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-opponent .at {
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.game-score {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --- player table ---------------------------------------------------------- */
+
+.filter-input {
+  flex: 0 1 240px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.filter-input:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 1px;
+  border-color: var(--navy);
+}
+
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.player-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.player-table th,
+.player-table td {
+  padding: 10px 12px;
+  text-align: right;
+  border-top: 1px solid var(--border);
+}
+
+.player-table thead th {
+  border-top: none;
+  position: sticky;
+  top: 0;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.player-table thead th:hover,
+.player-table thead th:focus-visible {
+  background: var(--navy-deep);
+  outline: none;
+}
+
+/* Sort arrow: a reserved-width slot so headers don't shift when it appears. */
+.player-table thead th::after {
+  content: '';
+  display: inline-block;
+  width: 0.85em;
+  text-align: right;
+  color: var(--red);
+}
+
+.player-table thead th.is-sorted[aria-sort="descending"]::after {
+  content: '▾';
+}
+
+.player-table thead th.is-sorted[aria-sort="ascending"]::after {
+  content: '▴';
+}
+
+.player-table th:first-child,
+.player-table td:first-child {
+  text-align: left;
+}
+
+.player-table tbody tr:hover {
+  background: #f7f9fc;
+}
+
+.player-table td {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Names stay put while the stat columns scroll under them. */
+.player-name {
+  font-weight: 600;
+  white-space: nowrap;
+  position: sticky;
+  left: 0;
+  background: var(--surface);
+  z-index: 1;
+}
+
+.player-table tbody tr:hover .player-name {
+  background: #f7f9fc;
+}
+
+.player-table thead th {
+  z-index: 2;
+}
+
+.player-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+}
+
+.is-null {
+  color: #b3bcc7;
+}
+
+.table-empty {
+  margin: 14px 0 0;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* --- footer ---------------------------------------------------------------- */
+
+.site-footer {
+  margin-top: 48px;
+  padding: 20px 0 32px;
+  border-top: 1px solid var(--border);
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* --- narrow screens -------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .wrap {
+    padding: 0 14px;
+  }
+
+  .card-grid {
+    /* Single column rather than squashing six cards side by side. */
+    grid-template-columns: 1fr;
+  }
+
+  .header-inner {
+    align-items: flex-start;
+  }
+
+  .brand-text h1 {
+    font-size: 19px;
+  }
+
+  .stat-value {
+    font-size: 26px;
+  }
+
+  .game-row {
+    grid-template-columns: 30px 62px 1fr auto;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+
+  .section-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .filter-input {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  /* The table scrolls sideways rather than squashing 16 columns. Tighter
+     padding and a capped name column keep more stats on screen at 375px. */
+  .player-table {
+    font-size: 13px;
+  }
+
+  .player-table th,
+  .player-table td {
+    padding: 9px 10px;
+  }
+
+  .player-name {
+    max-width: 132px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* A hairline marks where the frozen name column ends. */
+  .player-table th:first-child,
+  .player-table td:first-child {
+    box-shadow: 1px 0 0 var(--border);
+  }
+}
