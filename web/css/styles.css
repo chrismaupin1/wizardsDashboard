@@ -1,24 +1,63 @@
 /* Washington Wizards dashboard
-   Palette lives here and nowhere else - change these six values to re-skin. */
+   Styled from the "Wizards Dashboard" design system.
+   Tokens live here and nowhere else - change these values to re-skin.
+   Light and dark are both defined; dark follows the OS setting. */
 
 :root {
-  --navy: #002b5c;
-  --navy-deep: #001a38;
-  --red: #e31837;
+  color-scheme: light dark;
 
-  --bg: #f4f5f7;
-  --surface: #ffffff;
-  --border: #dfe3e8;
+  /* --- color: light theme ------------------------------------------------- */
+  --navy: #002b5c;        /* brand fill: header, win pills, primary actions */
+  --navy-text: #002b5c;   /* navy where it has to read as text */
+  --red: #e31837;         /* accent: links, loss pills, active sort, focus */
+  --silver: #c4ced4;      /* tint: dividers, neutral pills - never text */
 
-  --ink: #16202e;
-  --ink-soft: #5b6775;
+  --surface: #f5f7f9;     /* the page */
+  --card: #ffffff;        /* stat cards, table body, panels */
+  --ink: #0e1a2b;         /* body text, stat numbers */
+  --ink-muted: #5a6878;   /* labels, captions, the null dash */
+  --line: #d9dfe5;        /* row rules and card borders */
 
-  --win: #1a7f4b;
-  --loss: #c02333;
+  --on-brand: #ffffff;    /* text on a navy fill */
+  --on-accent: #ffffff;   /* text on a red fill */
 
-  --radius: 10px;
-  --gap: 16px;
-  --shadow: 0 1px 2px rgba(0, 43, 92, 0.06), 0 4px 12px rgba(0, 43, 92, 0.05);
+  /* --- type --------------------------------------------------------------- */
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* --- space: 4px base ---------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* --- shape -------------------------------------------------------------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* navy and red both lift so fills and accents stay legible on the dark
+       ground. --navy-text lifts further: the fill navy is only 2.2:1 on the
+       card, too low to set numbers in. */
+    --navy: #2a5694;
+    --navy-text: #7fa8dc;
+    --red: #ff4d5e;
+    --silver: #c4ced4;
+
+    --surface: #0a1424;
+    --card: #12203a;
+    --ink: #eef2f5;
+    --ink-muted: #9aa8b8;
+    --line: #24324a;
+
+    --on-brand: #ffffff;
+    /* White on the lifted red is only 3.2:1, so text on a red fill goes dark. */
+    --on-accent: #0a1424;
+  }
 }
 
 * {
@@ -27,79 +66,91 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--surface);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 22px;
   -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
 }
 
 .wrap {
   width: 100%;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--space-6);
 }
 
 /* --- header ---------------------------------------------------------------- */
 
 .site-header {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
-  color: #fff;
-  padding: 22px 0;
-  border-bottom: 4px solid var(--red);
+  background: var(--navy);
+  color: var(--on-brand);
+  padding: var(--space-6) 0;
+  /* Header dividers are silver in this system, not red. */
+  border-bottom: 3px solid var(--silver);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gap);
+  gap: var(--space-4);
   flex-wrap: wrap;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: var(--space-4);
   min-width: 0;
 }
 
 .brand-mark {
   flex: none;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 2px solid var(--red);
-  font-size: 20px;
+  border: 2px solid var(--silver);
+  font-family: var(--font-display);
+  font-size: 26px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  line-height: 1;
 }
 
+/* The team name is the mark in this system: display type, no logo. */
 .brand-text h1 {
   margin: 0;
-  font-size: 22px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 36px;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
 }
 
 .brand-sub {
-  margin: 2px 0 0;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.72);
+  margin: var(--space-1) 0 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .record-badge {
   margin: 0;
-  padding: 7px 14px;
-  border-radius: 999px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 14px;
+  border: 1px solid rgba(196, 206, 212, 0.45);
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 28px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -108,53 +159,63 @@ body {
 /* --- load / error states --------------------------------------------------- */
 
 .status {
-  margin: 48px 0;
+  margin: var(--space-8) 0;
   text-align: center;
-  color: var(--ink-soft);
+  color: var(--ink-muted);
 }
 
 .error-banner {
-  margin: 32px 0;
-  padding: 16px 18px;
-  border-radius: var(--radius);
-  background: #fdecee;
-  border: 1px solid #f5c2c9;
-  border-left: 4px solid var(--red);
-  color: #8c1626;
+  margin: var(--space-8) 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  background: color-mix(in srgb, var(--red) 8%, var(--card));
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--red);
+  color: var(--ink);
 }
 
 .error-banner strong {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: var(--space-1);
+  color: var(--red);
 }
 
 .error-banner code {
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 16px;
   word-break: break-word;
 }
 
 /* --- sections -------------------------------------------------------------- */
 
 .section {
-  margin: 32px 0;
+  margin: var(--space-6) 0;
+}
+
+/* The player table gets the wider gap away from the overview. */
+#roster-section {
+  margin-top: var(--space-8);
 }
 
 .section-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gap);
+  gap: var(--space-4);
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: var(--space-4);
 }
 
+/* "label" style: 12/16, 600, uppercase, 0.04em. */
 .section-title {
-  margin: 0 0 14px;
-  font-size: 13px;
-  font-weight: 700;
+  margin: 0 0 var(--space-4);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
 }
 
 .section-head .section-title {
@@ -166,48 +227,51 @@ body {
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: var(--gap);
+  gap: var(--space-4);
 }
 
+/* Borders, not shadows. */
 .stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 16px 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
 }
 
 .stat-label {
   margin: 0;
   font-size: 12px;
+  line-height: 16px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
 }
 
+/* "stat" style: display type, 32/36, 700, tabular. */
 .stat-value {
-  margin: 6px 0 0;
-  font-size: 30px;
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 36px;
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
-  color: var(--navy);
+  color: var(--ink);
 }
 
 .stat-value.is-win {
-  color: var(--win);
+  color: var(--navy-text);
 }
 
 .stat-value.is-loss {
-  color: var(--loss);
+  color: var(--red);
 }
 
 .stat-note {
-  margin: 6px 0 0;
-  font-size: 13px;
-  color: var(--ink-soft);
+  margin: var(--space-1) 0 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--ink-muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -217,10 +281,9 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
@@ -228,38 +291,47 @@ body {
   display: grid;
   grid-template-columns: 34px 74px 1fr auto;
   align-items: center;
-  gap: 12px;
-  padding: 12px 18px;
-  border-top: 1px solid var(--border);
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  min-height: 44px;
+  border-top: 1px solid var(--line);
 }
 
 .game-row:first-child {
   border-top: none;
 }
 
+/* Win is navy, loss is red - and the pill always carries the W or L, so the
+   result never rests on hue alone. */
 .pill {
   display: grid;
   place-items: center;
-  width: 26px;
+  min-width: 26px;
   height: 26px;
-  border-radius: 6px;
-  font-size: 13px;
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 16px;
   font-weight: 700;
-  color: #fff;
-  background: var(--ink-soft);
+  line-height: 1;
+  background: var(--silver);
+  color: var(--ink);
 }
 
 .pill.is-win {
-  background: var(--win);
+  background: var(--navy);
+  color: var(--on-brand);
 }
 
 .pill.is-loss {
-  background: var(--loss);
+  background: var(--red);
+  color: var(--on-accent);
 }
 
 .game-date {
-  font-size: 13px;
-  color: var(--ink-soft);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--ink-muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -272,7 +344,7 @@ body {
 }
 
 .game-opponent .at {
-  color: var(--ink-soft);
+  color: var(--ink-muted);
   font-weight: 400;
 }
 
@@ -286,42 +358,46 @@ body {
 
 .filter-input {
   flex: 0 1 240px;
-  padding: 8px 12px;
-  font: inherit;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-sans);
   font-size: 14px;
+  line-height: 20px;
   color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.filter-input::placeholder {
+  color: var(--ink-muted);
 }
 
 .filter-input:focus-visible {
-  outline: 2px solid var(--navy);
-  outline-offset: 1px;
-  border-color: var(--navy);
+  border-color: var(--red);
 }
 
 .table-wrap {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
+/* "table" style: 14/20. */
 .player-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  line-height: 20px;
   white-space: nowrap;
 }
 
 .player-table th,
 .player-table td {
-  padding: 10px 12px;
+  padding: var(--space-2) var(--space-4);
   text-align: right;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--line);
 }
 
 .player-table thead th {
@@ -329,19 +405,26 @@ body {
   position: sticky;
   top: 0;
   background: var(--navy);
-  color: #fff;
+  color: var(--on-brand);
   font-size: 12px;
+  line-height: 16px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   cursor: pointer;
   user-select: none;
+  /* Reserved space for the active-column rule, so nothing shifts on sort. */
+  box-shadow: inset 0 -3px 0 transparent;
 }
 
-.player-table thead th:hover,
-.player-table thead th:focus-visible {
-  background: var(--navy-deep);
-  outline: none;
+.player-table thead th:hover {
+  background: color-mix(in srgb, var(--on-brand) 12%, var(--navy));
+}
+
+/* The active sort column is marked in red - the accent, not a second fill,
+   so the header keeps its contrast in both themes. */
+.player-table thead th.is-sorted {
+  box-shadow: inset 0 -3px 0 var(--red);
 }
 
 /* Sort arrow: a reserved-width slot so headers don't shift when it appears. */
@@ -367,7 +450,7 @@ body {
 }
 
 .player-table tbody tr:hover {
-  background: #f7f9fc;
+  background: color-mix(in srgb, var(--navy) 6%, var(--card));
 }
 
 .player-table td {
@@ -380,12 +463,12 @@ body {
   white-space: nowrap;
   position: sticky;
   left: 0;
-  background: var(--surface);
+  background: var(--card);
   z-index: 1;
 }
 
 .player-table tbody tr:hover .player-name {
-  background: #f7f9fc;
+  background: color-mix(in srgb, var(--navy) 6%, var(--card));
 }
 
 .player-table thead th {
@@ -398,35 +481,39 @@ body {
   z-index: 3;
 }
 
+/* A missing stat reads as a muted dash. */
 .is-null {
-  color: #b3bcc7;
+  color: var(--ink-muted);
 }
 
 .table-empty {
-  margin: 14px 0 0;
+  margin: var(--space-4) 0 0;
   text-align: center;
-  color: var(--ink-soft);
+  color: var(--ink-muted);
 }
 
 /* --- footer ---------------------------------------------------------------- */
 
 .site-footer {
-  margin-top: 48px;
-  padding: 20px 0 32px;
-  border-top: 1px solid var(--border);
-  color: var(--ink-soft);
-  font-size: 13px;
+  margin-top: var(--space-8);
+  padding: var(--space-6) 0 var(--space-8);
+  border-top: 1px solid var(--line);
+  color: var(--ink-muted);
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .site-footer p {
   margin: 0;
+  font-variant-numeric: tabular-nums;
 }
 
 /* --- narrow screens -------------------------------------------------------- */
 
 @media (max-width: 768px) {
   .wrap {
-    padding: 0 14px;
+    /* space-4 is the mobile gutter. */
+    padding: 0 var(--space-4);
   }
 
   .card-grid {
@@ -439,17 +526,31 @@ body {
   }
 
   .brand-text h1 {
-    font-size: 19px;
+    font-size: 26px;
+    line-height: 30px;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+
+  .record-badge {
+    font-size: 18px;
+    line-height: 24px;
+    padding: var(--space-1) var(--space-4);
   }
 
   .stat-value {
-    font-size: 26px;
+    font-size: 28px;
+    line-height: 32px;
   }
 
   .game-row {
     grid-template-columns: 30px 62px 1fr auto;
-    gap: 8px;
-    padding: 12px 14px;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
   }
 
   .section-head {
@@ -464,13 +565,9 @@ body {
 
   /* The table scrolls sideways rather than squashing 16 columns. Tighter
      padding and a capped name column keep more stats on screen at 375px. */
-  .player-table {
-    font-size: 13px;
-  }
-
   .player-table th,
   .player-table td {
-    padding: 9px 10px;
+    padding: var(--space-2) 10px;
   }
 
   .player-name {
@@ -482,6 +579,11 @@ body {
   /* A hairline marks where the frozen name column ends. */
   .player-table th:first-child,
   .player-table td:first-child {
-    box-shadow: 1px 0 0 var(--border);
+    box-shadow: 1px 0 0 var(--line);
+  }
+
+  /* Keep the active-column rule on the sticky first header. */
+  .player-table thead th.is-sorted:first-child {
+    box-shadow: 1px 0 0 var(--line), inset 0 -3px 0 var(--red);
   }
 }
