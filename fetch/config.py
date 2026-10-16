@@ -6,7 +6,7 @@ TEAM_ID and SEASON live here and nowhere else.
 import os
 
 TEAM_ID = 1610612764  # Washington Wizards
-SEASON = "2025-26"
+SEASON = "2026-27"
 
 # Paths -----------------------------------------------------------------------
 
