@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "date": "2026-10-21",
+    "opponent": "MIL",
+    "home": true,
+    "result": "W",
+    "team_score": 128,
+    "opp_score": 116
+  }
+]

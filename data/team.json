@@ -1,14 +1,14 @@
 {
   "team_name": "Washington Wizards",
-  "wins": 0,
+  "wins": 1,
   "losses": 0,
-  "win_pct": 0.0,
+  "win_pct": 1.0,
   "conference": "East",
-  "conference_rank": 15,
-  "points_per_game": 0.0,
-  "opp_points_per_game": 0.0,
-  "streak": "W0",
-  "last_10": "0-0",
-  "home_record": "0-0",
+  "conference_rank": 5,
+  "points_per_game": 128.0,
+  "opp_points_per_game": 116.0,
+  "streak": "W1",
+  "last_10": "1-0",
+  "home_record": "1-0",
   "road_record": "0-0"
 }
