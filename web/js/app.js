@@ -52,12 +52,13 @@ function ordinal(n) {
   }
 }
 
-/* 0.207 -> ".207", the conventional way to write a win percentage. */
+/* 0.207 -> "20.7%", 1.0 -> "100%". Rounded to one decimal; whole numbers
+ * drop the ".0". */
 function formatPct(value) {
   if (value === null || value === undefined) {
     return '—';
   }
-  return String(value).replace(/^0\./, '.');
+  return Math.round(value * 1000) / 10 + '%';
 }
 
 var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
